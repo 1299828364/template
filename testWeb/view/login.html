@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="../js/index.js"></script>
+<script src="../js/jquery-3.5.1/jquery-3.5.1.min.js"></script>
+<body>
+
+
+<input id="account" placeholder="请输入账号"><p></p>
+<input id="password" placeholder="请输入密码">
+
+<button onclick="loginHandler()">登录</button>
+
+
+</body>
+<script type="text/javascript">
+
+    function loginHandler() {
+        let user = {};
+        user.userName = getValueById("account")
+        user.password = getValueById("password")
+        getSomeFor("",user)
+    }
+
+
+    function getSomeFor(url,letData){
+        return $.ajax({
+            url:"http://localhost:7000/login",
+            type:"POST",
+            data: JSON.stringify(letData),
+            contentType:"application/json;charset=UTF-8",
+            success:function (result){
+                log(result)
+                token=result.data
+                window.localStorage.setItem("token",token)
+                window.location.href="./index.html"
+            },
+            error:function (result){
+                log(result)
+            }
+        })
+    }
+
+    function PostSomeFor(url,data){
+
+    }
+
+
+
+
+    function getElementByClassName(className){
+        return document.getElementsByClassName(className);
+    }
+
+    function getElementById(id){
+        return document.getElementById(id);
+    }
+
+    function getValueByClassName(className){
+
+    }
+
+    function getValueById(id){
+        return getElementById(id).value
+    }
+
+    function log(value){
+        console.log(value)
+    }
+
+</script>
+</html>

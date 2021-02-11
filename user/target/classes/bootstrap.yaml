@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: lml-user
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        file-extension: yaml
+        shared-dataids: all-template-service.yaml
+        refreshable-dataids:
+          - all-template-service.yaml
+        group: DEFAULT_GROUP
+
+  profiles:
+    active: dev

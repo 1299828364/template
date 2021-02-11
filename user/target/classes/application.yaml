@@ -1,0 +1,27 @@
+#server:
+#  port: 9999
+#spring:
+#  application:
+#    name: lml-user
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql:///test?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
+#    username: root
+#    password: root
+#  jpa:
+#    properties:
+#      hibernate:
+#        hbm2ddl:
+#          auto: update
+#        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+#
+#  cloud:
+#    nacos:
+#      discovery:
+#        server-addr: 127.0.0.1:8848
+#
+#
+#    sentinel:
+#      transport:
+#        port: 8888 #跟控制台交流的端口,随意指定一个未使用的端口即可
+#        dashboard: localhost:8080 # 指定控制台服务的地址

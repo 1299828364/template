@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>INDEX</h1>
+<H1 id="time"></H1>
+
+<div class="mainContainer">
+<!--    <video src="http://localhost:7000/lml-user/getVideo1/eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySW5mbyI6eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoiMTExIiwicGFzc3dvcmQiOiIxMTEiLCJwaG9uZSI6bnVsbCwidGVtcFZpcEZsYWciOjAsImNyZWF0ZVRpbWUiOm51bGwsInZpcERlYWRMaW5lIjpudWxsLCJkZWxGbGFnIjowLCJzdGF0ZSI6MH0sImV4cCI6MTYxMzM2NzQxMn0.TydOwaDfA7hzwTRAVeGvbdZcC7uCGaqxetrq7n7w8N8" class="centeredVideo" controls autoplay width="1024" height="576">Your browser is too old which doesn't support HTML5 video.</video>-->
+    <video id="videoElement" class="centeredVideo" controls autoplay width="1024" height="576">Your browser is too old which doesn't support HTML5 video.</video>
+<!--    <video src="../resource/tmp.mp4" class="centeredVideo" controls autoplay width="1024" height="576">Your browser is too old which doesn't support HTML5 video.</video>-->
+</div>
+<br>
+<div class="controls">
+    <!--<button onclick="flv_load()">加载</button>-->
+    <button onclick="flv_start()">开始</button>
+    <button onclick="flv_pause()">暂停</button>
+    <button onclick="flv_destroy()">停止</button>
+    <label>
+        <input style="width:100px" type="text" name="seekpoint" />
+    </label>
+    <button onclick="flv_seekto()">跳转</button>
+</div>
+
+</body>
+<style>
+    .mainContainer {
+        display: block;
+        width: 1024px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .urlInput {
+        display: block;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+
+    .centeredVideo {
+        display: block;
+        width: 100%;
+        height: 576px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: auto;
+    }
+
+    .controls {
+        display: block;
+        width: 100%;
+        text-align: left;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+<script src="../js/flv.min.js"></script>
+<script src="../js/index.js"></script>
+<script src="../js/jquery-3.5.1/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+
+
+
+    setTime()
+    let token = window.localStorage.getItem("token")
+    if(token==null||token==""){
+        alert("请登录")
+        window.location.href="./login.html"
+    }
+    function setTime(){
+        document.getElementById("time").innerText=Date()
+    }
+
+    window.setInterval(setTime,1000)
+
+
+    if (flvjs.isSupported()) {
+        var videoElement = document.getElementById('videoElement');
+        let token = localStorage.getItem("token")
+        // let token = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySW5mbyI6eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoiMTExIiwicGFzc3dvcmQiOiIxMTEiLCJwaG9uZSI6bnVsbCwidGVtcFZpcEZsYWciOjAsImNyZWF0ZVRpbWUiOm51bGwsInZpcERlYWRMaW5lIjpudWxsLCJkZWxGbGFnIjowLCJzdGF0ZSI6MH0sImV4cCI6MTYxMzM2NzQxMn0.TydOwaDfA7hzwTRAVeGvbdZcC7uCGaqxetrq7n7w8N8"
+        var flvPlayer = flvjs.createPlayer({
+            // type: 'flv',
+            type:'mp4',
+            // url: 'http://localhost:9999/getVideo/'+token,
+            // url: 'http://localhost:9999/getVideo1/'+token,
+            url: 'http://localhost:7000/lml-resource/resource/tmp.mp4/'+token,
+            // url: '../resource/15223201_1_0.flv'
+            // cors:true,
+            // cors: false
+        },{
+            // enableStashBuffer: false,
+            // stashInitialSize: 128,
+            // autoCleanupSourceBuffer: true,
+            // headers:{
+            //     'Authorization':'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySW5mbyI6eyJ1c2VySWQiOjIsInVzZXJOYW1lIjoiMTExIiwicGFzc3dvcmQiOiIxMTEiLCJwaG9uZSI6bnVsbCwidGVtcFZpcEZsYWciOjAsImNyZWF0ZVRpbWUiOm51bGwsInZpcERlYWRMaW5lIjpudWxsLCJkZWxGbGFnIjowLCJzdGF0ZSI6MH0sImV4cCI6MTYxMjE0NjI4M30.zl4QfP9Y_H_gQtyz2-PgN6nXvK1esp_BBV5klUeszYo'
+            // }
+        });
+        flvPlayer.attachMediaElement(videoElement);
+        flvPlayer.load();
+        flvPlayer.play();
+    }
+
+    var player = document.getElementById('videoElement');
+
+    function flv_start() {
+        player.play();
+    }
+
+    function flv_pause() {
+        player.pause();
+    }
+
+    function flv_destroy() {
+        player.pause();
+        player.unload();
+        player.detachMediaElement();
+        player.destroy();
+        player = null;
+    }
+
+    function flv_seekto() {
+        player.currentTime = parseFloat(document.getElementsByName('seekpoint')[0].value);
+    }
+</script>
+</html>
