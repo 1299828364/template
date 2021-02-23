@@ -46,8 +46,13 @@ public class RequestUtil {
     }
 
     public User getUserInfo(){
-        return JSON.parseObject(request.getHeader("user"))
-                .toJavaObject(User.class);
+        try {
+            return JSON.parseObject(request.getHeader("user"))
+                    .toJavaObject(User.class);
+        }catch (Exception e){
+            return new User();
+        }
+
     }
 
     public void putErrorResponse(int state,String msg) throws IOException {

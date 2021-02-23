@@ -36,7 +36,6 @@ public class QueryController /*implements UserQueryProvider*/ {
     RequestUtil requestUtil;
 
 
-
     @RequestMapping(value = "/test2")
     @RoleTest(hasRole = "游客会员")
     public Result<String> test1(){

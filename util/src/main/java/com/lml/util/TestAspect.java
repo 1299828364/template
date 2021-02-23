@@ -51,7 +51,7 @@ public class TestAspect{
 
         String methodAccess = TestParse.parse(targetClass, methodName, args);
 
-        if(StringUtils.isBlank(methodAccess)){
+        if(StringUtils.isBlank(methodAccess)||"游客会员".equals(methodAccess)){
             return joinPoint.proceed();
         }
 
