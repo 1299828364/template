@@ -8,6 +8,7 @@ import com.lml.service.GateWayUserService;
 import com.lml.util.ResultUtil;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,11 +40,22 @@ public class loginController {
 //    @Value("${jwt.secret-key}")
     private String jwtSecretKey="asdasfuqiwu1y289yuwqihiuasgd8921893sahdiuqwuieuiahsuidaiushf";
 
+    @RequestMapping("/register")
+    public Result<Object> register(@RequestBody User user){
+        user.setDelFlag(0);
+        user.setState(0);
+        User userByUserName = gateWayUserService.getUserByUserName(user.getUserName());
+        if(!Objects.isNull(userByUserName)){
+            return ResultUtil.error("账号已存在");
+        }
+        return ResultUtil.success(gateWayUserService.register(user));
+    }
+
     @RequestMapping("/login")
     public Result<Object> login(@RequestBody UserDto userDTO) throws JsonProcessingException {
         User user = gateWayUserService.getUserByUserName(userDTO.getUserName());
         if (Objects.isNull(user)) {
-            return ResultUtil.error("账户不存在");
+            return ResultUtil.error("账户或密码错误");
         }
         String token;
         if (user.getPassword().equals(userDTO.getPassword())) {
@@ -60,7 +72,7 @@ public class loginController {
                     .compact();
 
         } else {
-            return ResultUtil.error("密码错误");
+            return ResultUtil.error("账户或密码错误");
         }
         return ResultUtil.success(token);
     }

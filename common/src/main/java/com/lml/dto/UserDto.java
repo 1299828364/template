@@ -8,7 +8,7 @@ import lombok.Setter;
 /**
  * 描述: 用户DTO
  *
- * @Auther: lzx
+ * @Auther: lml
  * @Date: 2019/7/9 13:57
  */
 @Getter

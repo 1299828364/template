@@ -35,4 +35,8 @@ public class User {
     private int delFlag;
 
     private int state;
+
+    private int pic;
+
+    private String picUrl;
 }

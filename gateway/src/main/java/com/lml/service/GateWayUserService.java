@@ -21,4 +21,7 @@ public interface GateWayUserService {
     //    @Override
     @RequestMapping(value = "/UserByName",method = RequestMethod.GET)
     public User getUserByUserName(@RequestParam String userName);
+
+    @RequestMapping(value = "/register",method = RequestMethod.GET)
+    public User register(User user);
 }
