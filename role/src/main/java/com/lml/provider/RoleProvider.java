@@ -13,4 +13,8 @@ public interface RoleProvider {
 
     @RequestMapping(value = "/findAll")
     Result<List<Role>> findAll();
+
+
+    @RequestMapping(value = "/checkAuth")
+    Result checkAuth();
 }

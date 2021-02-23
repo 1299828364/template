@@ -18,8 +18,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 public class InterceptorConfig extends WebMvcConfigurationSupport {
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
-        registry.addResourceHandler("/resource/**").addResourceLocations("classpath:/META-INF/resources/");
+//        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+//        registry.addResourceHandler("/resource/**").addResourceLocations("classpath:/META-INF/resources/");
+        registry.addResourceHandler("/resource/**").addResourceLocations("file:E:/graduationDesign/resource/");
         super.addResourceHandlers(registry);
     }
     @Autowired
