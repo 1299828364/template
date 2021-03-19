@@ -18,12 +18,10 @@ public class Role {
     private long roleId;
 
     private String roleName;
-
-    private int delFlag;
-
-    private int state;
-
+    private String delFlag;
+    private long state;
     private Date createTime;
+    private Date updateTime;
 
 
 }
